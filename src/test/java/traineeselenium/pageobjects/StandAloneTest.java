@@ -1,4 +1,4 @@
-package traineeselenium;
+package traineeselenium.pageobjects;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 import org.openqa.selenium.By;
@@ -24,8 +24,8 @@ public class StandAloneTest {
         driver.manage().window().maximize();
         driver.get("https://rahulshettyacademy.com/client");
 
-
-        driver.findElement(By.id("userEmail")).sendKeys("d12311203@gmail.com");
+        LandingPage ladingPage = new LandingPage(driver);
+//        driver.findElement(By.id("userEmail")).sendKeys("d12311203@gmail.com");
         driver.findElement(By.id("userPassword")).sendKeys("Prueba123");
         driver.findElement(By.id("login")).click();
         WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(5));
