@@ -1,5 +1,6 @@
 package traineeselenium.pageobjects;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -27,10 +28,20 @@ public class LandingPage extends AbstractComponents {
     @FindBy(id = "login")
     WebElement submit;
 
-    public void loginApp(String email, String pass){
+    @FindBy(css = ".toast-container")
+    WebElement errorText;
+
+    public ProductCatalogPage loginApp(String email, String pass){
         getUserEmail.sendKeys(email);
         getUserPassword.sendKeys(pass);
         submit.click();
+        ProductCatalogPage productCatalogPage = new ProductCatalogPage(driver);
+        return productCatalogPage;
+    }
+
+    public String getErrorMessage(){
+        waitForWebElementToAppear(errorText);
+        return errorText.getText();
     }
 
     public void site(){

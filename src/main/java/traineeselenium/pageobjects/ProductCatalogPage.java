@@ -9,11 +9,11 @@ import traineeselenium.AbstractComponents.AbstractComponents;
 
 import java.util.List;
 
-public class CatalogPage extends AbstractComponents {
+public class ProductCatalogPage extends AbstractComponents {
 
     WebDriver driver;
 
-    public CatalogPage(WebDriver driver){
+    public ProductCatalogPage(WebDriver driver){
         super(driver);
         this.driver = driver;
         PageFactory.initElements(driver, this);

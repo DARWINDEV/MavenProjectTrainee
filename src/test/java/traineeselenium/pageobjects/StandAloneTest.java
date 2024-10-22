@@ -54,17 +54,6 @@ public class StandAloneTest {
 
 //        Lista de paises
 
-        Actions a = new Actions(driver);
-        a.sendKeys(driver.findElement(By.xpath("//input[@placeholder='Select Country']")), "Mexico").build().perform();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ta-results")));
 
-        driver.findElement(By.xpath("//button[contains(@class,'ng-star-inserted')]")).click();
-
-        driver.findElement(By.xpath("//a[text()='Place Order ']")).click();
-
-        String confirmMessage = driver.findElement(By.cssSelector(".hero-primary")).getText();
-
-        Assert.assertTrue(confirmMessage.equalsIgnoreCase("THANKYOU FOR THE ORDER."));
-        driver.quit();
     }
 }

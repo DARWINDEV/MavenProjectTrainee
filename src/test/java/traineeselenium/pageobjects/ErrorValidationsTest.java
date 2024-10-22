@@ -5,12 +5,19 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
 import java.util.List;
 
-public class SubmitOrderTest extends BaseTest {
+public class ErrorValidationsTest extends BaseTest {
 
     @Test
-    public void submitOrder() throws InterruptedException {
+    public void LoginErrorValidation() throws IOException, InterruptedException {
+
+        ProductCatalogPage productCatalogue = landingPage.loginApp("d12311203@gmail.com", "Prueb23");
+        Assert.assertEquals("Incorrect email or password.", landingPage.getErrorMessage());
+    }
+    @Test
+    public void ProductErrorValidation() throws InterruptedException {
         String productName = "ZARA COAT 3";
 
         ProductCatalogPage productCatalogue = landingPage.loginApp("d12311203@gmail.com", "Prueba123");
@@ -21,12 +28,6 @@ public class SubmitOrderTest extends BaseTest {
 
         Boolean match = cartPage.verifyProductDisplay(productName);
         Assert.assertTrue(match);
-        CheckOutPage checkOutPage = cartPage.goToCheckout();
-        checkOutPage.selectCountry("Mexico");
-        ConfirmationPage confirmationPage = checkOutPage.submitOrder();
-
-        String confirmMessage = confirmationPage.getConfirmationMsg();
-        Assert.assertTrue(confirmMessage.equalsIgnoreCase("THANKYOU FOR THE ORDER."));
 
     }
 }

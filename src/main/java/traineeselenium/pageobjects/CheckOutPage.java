@@ -8,9 +8,18 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import traineeselenium.AbstractComponents.AbstractComponents;
 
+public class CheckOutPage extends AbstractComponents {
 
+    WebDriver driver;
 
-public class PaymentPage extends AbstractComponents {
+    public CheckOutPage(WebDriver driver) {
+        super(driver);
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
+
+    @FindBy(css = ".actions a")
+    WebElement submit;
 
     @FindBy(xpath = "//input[@placeholder='Select Country']")
     WebElement country;
@@ -20,16 +29,16 @@ public class PaymentPage extends AbstractComponents {
 
     By countries = By.cssSelector(".ta-results");
 
-    public PaymentPage(WebDriver driver) {
-        super(driver);
-        PageFactory.initElements(driver, this);
-    }
-
-    public void selectCountry(WebDriver driver, String countryName){
+    public void selectCountry(String countryName){
         Actions a = new Actions(driver);
         a.sendKeys(country, countryName).build().perform();
         waitElementToAppear(countries);
         selectCountry.click();
+
     }
 
+    public ConfirmationPage submitOrder(){
+        submit.click();
+        return new ConfirmationPage(driver);
+    }
 }
