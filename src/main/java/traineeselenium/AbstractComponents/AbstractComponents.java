@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import traineeselenium.pageobjects.CartPage;
-import traineeselenium.pageobjects.CheckOutPage;
+import traineeselenium.pageobjects.OrderPage;
 
 import java.time.Duration;
 
@@ -23,6 +23,9 @@ public class AbstractComponents {
 
     @FindBy(css = "[routerlink*='cart']")
     WebElement cartBtn;
+
+    @FindBy(css = "[routerlink*='myorders']")
+    WebElement orderHeader;
 
     @FindBy(xpath = "//button[text()='Checkout']")
     WebElement checkoutBtn;
@@ -49,6 +52,12 @@ public class AbstractComponents {
         cartBtn.click();
         CartPage cartPage = new CartPage(driver);
         return cartPage;
+    }
+
+    public OrderPage goToOrdersPage(){
+        orderHeader.click();
+        OrderPage orderPage = new OrderPage(driver);
+        return orderPage;
     }
 
     public void waitElementToDisappear(WebElement element) throws InterruptedException {

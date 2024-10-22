@@ -10,11 +10,12 @@ import java.util.List;
 
 public class ErrorValidationsTest extends BaseTest {
 
-    @Test
+    @Test(groups = {"ErrorHandling"})
     public void LoginErrorValidation() throws IOException, InterruptedException {
 
-        ProductCatalogPage productCatalogue = landingPage.loginApp("d12311203@gmail.com", "Prueb23");
+        ProductCatalogPage productCatalogue = landingPage.loginApp("d12311203@gmail.com", "Prueba23");
         Assert.assertEquals("Incorrect email or password.", landingPage.getErrorMessage());
+        tearDown();
     }
     @Test
     public void ProductErrorValidation() throws InterruptedException {
@@ -28,6 +29,6 @@ public class ErrorValidationsTest extends BaseTest {
 
         Boolean match = cartPage.verifyProductDisplay(productName);
         Assert.assertTrue(match);
-
+        tearDown();
     }
 }
