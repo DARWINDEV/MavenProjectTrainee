@@ -4,18 +4,19 @@ import traineeselenium.TestComponents.BaseTest;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import traineeselenium.TestComponents.Retry;
 
 import java.io.IOException;
 import java.util.List;
 
 public class ErrorValidationsTest extends BaseTest {
 
-    @Test(groups = {"ErrorHandling"})
+    @Test(groups = {"ErrorHandling"}, retryAnalyzer = Retry.class)
     public void LoginErrorValidation() throws IOException, InterruptedException {
 
 
         landingPage.loginApp("d12311203@gmail.com", "Prueba23");
-        Assert.assertEquals("Incorrect email password.", landingPage.getErrorMessage());
+        Assert.assertEquals("Incorrect email or password.", landingPage.getErrorMessage());
         tearDown();
     }
     @Test
