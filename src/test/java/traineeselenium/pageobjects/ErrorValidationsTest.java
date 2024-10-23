@@ -1,6 +1,6 @@
 package traineeselenium.pageobjects;
 
-import TestComponents.BaseTest;
+import traineeselenium.TestComponents.BaseTest;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -13,8 +13,9 @@ public class ErrorValidationsTest extends BaseTest {
     @Test(groups = {"ErrorHandling"})
     public void LoginErrorValidation() throws IOException, InterruptedException {
 
-        ProductCatalogPage productCatalogue = landingPage.loginApp("d12311203@gmail.com", "Prueba23");
-        Assert.assertEquals("Incorrect email or password.", landingPage.getErrorMessage());
+
+        landingPage.loginApp("d12311203@gmail.com", "Prueba23");
+        Assert.assertEquals("Incorrect email password.", landingPage.getErrorMessage());
         tearDown();
     }
     @Test

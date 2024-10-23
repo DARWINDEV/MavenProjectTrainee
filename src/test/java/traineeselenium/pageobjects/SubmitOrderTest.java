@@ -1,15 +1,11 @@
 package traineeselenium.pageobjects;
 
-import TestComponents.BaseTest;
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
+import traineeselenium.TestComponents.BaseTest;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -44,15 +40,6 @@ public class SubmitOrderTest extends BaseTest {
         OrderPage orderPage = productCatalogue.goToOrdersPage();
         Assert.assertTrue(orderPage.verifyOrderDisplay(productName));
         tearDown();
-    }
-
-    public String getScreeshot(String testCaseName) throws IOException {
-        TakesScreenshot ts = (TakesScreenshot) driver;
-        File source = ts.getScreenshotAs(OutputType.FILE);
-        File file = new File("reports\\" + testCaseName + ".png");
-        FileUtils.copyFile(source, file);
-        return "reports" + testCaseName + ".png";
-
     }
 
     //Extent reports --
