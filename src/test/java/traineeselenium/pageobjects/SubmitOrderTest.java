@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class SubmitOrderTest extends BaseTest {
-    String productName = "ZARA COAT 3";
+
     @Test(dataProvider = "getData", groups = {"Purchase"})
     public void submitOrder(HashMap<String, String> input) throws InterruptedException {
 
@@ -19,10 +19,10 @@ public class SubmitOrderTest extends BaseTest {
 //        ProductCatalogPage productCatalogue = landingPage.loginApp(text, text);
 
         List<WebElement> products = productCatalogue.getProductList();
-        productCatalogue.addProductToCard(productName);
+        productCatalogue.addProductToCard(input.get("product"));
         CartPage cartPage = productCatalogue.goToCardPage();
 
-        Boolean match = cartPage.verifyProductDisplay(productName);
+        Boolean match = cartPage.verifyProductDisplay(input.get("product"));
         Assert.assertTrue(match);
         CheckOutPage checkOutPage = cartPage.goToCheckout();
         checkOutPage.selectCountry("Mexico");
@@ -34,11 +34,11 @@ public class SubmitOrderTest extends BaseTest {
 
     }
 
-    @Test(dependsOnMethods = {"submitOrder"})
-    public void OrderHistoryTest(){
-        ProductCatalogPage productCatalogue = landingPage.loginApp("d12311203@gmail.com", "Prueba123");
+    @Test(dependsOnMethods = {"submitOrder"}, dataProvider = "getData", groups = {"Purchase"})
+    public void OrderHistoryTest(HashMap<String, String> input){
+        ProductCatalogPage productCatalogue = landingPage.loginApp(input.get("email"), input.get("password"));
         OrderPage orderPage = productCatalogue.goToOrdersPage();
-        Assert.assertTrue(orderPage.verifyOrderDisplay(productName));
+        Assert.assertTrue(orderPage.verifyOrderDisplay(input.get("product")));
         tearDown();
     }
 
@@ -46,11 +46,6 @@ public class SubmitOrderTest extends BaseTest {
 
     @DataProvider
     public Object[][] getData() throws IOException {
-
-//        HashMap<String, String> map = new HashMap<String, String>();
-//        map.put("email", "d12311203@gmail.com");
-//        map.put("password", "Prueba123");
-//        map.put("product", "ZARA COAT 3");
 
         List<HashMap<String, String>> data = getJsonDataToMap("src/test/java/data/PurchaseOrder.json");
         return new Object[][]{{data.get(0)}};

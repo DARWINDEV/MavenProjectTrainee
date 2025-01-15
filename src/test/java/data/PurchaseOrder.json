@@ -2,6 +2,7 @@
   {
   "email"   : "d12311203@gmail.com",
   "password": "Prueba123",
-  "product" : "ZARA COAT 3"
+  "incorrectPass": "Prueba23",
+  "product" : "IPHONE 13 PRO"
   }
 ]

@@ -66,17 +66,12 @@ public class BaseTest {
 
         try {
             //take screenshot and save it in a file
-
             File sourceFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 
             //copy the file to the required path
-
             File destinationFile = new File(System.getProperty("user.dir") + "\\reports\\" + testCaseName + ".png");
-
             FileHandler.copy(sourceFile, destinationFile);
-
             String[] relativePath = destinationFile.toString().split("reports");
-
             screenshotPath = ".\\" + relativePath[1];
 
         } catch (Exception e) {
